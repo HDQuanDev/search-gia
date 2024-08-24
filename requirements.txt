@@ -1,0 +1,6 @@
+flask
+playwright
+beautifulsoup4
+requests
+unidecode
+flask-cors

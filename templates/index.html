@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm giá sản phẩm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Kích hoạt chế độ dark mode bằng cách thêm class 'dark' vào phần tử HTML
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb', // Xanh dương Tailwind
+                        secondary: '#374151', // Màu xám đậm cho dark mode
+                    },
+                },
+            },
+        };
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .suggestions span:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .suggestions span {
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        /* Custom toggle button styles */
+        #theme-toggle {
+            background-color: #e5e7eb;
+        }
+
+        #theme-toggle-dark-icon {
+            display: none;
+        }
+
+        .dark #theme-toggle {
+            background-color: #374151;
+        }
+
+        .dark #theme-toggle-light-icon {
+            display: none;
+        }
+
+        .dark #theme-toggle-dark-icon {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <div class="container mx-auto px-4 py-8">
+
+        <!-- Nút chuyển đổi giao diện -->
+        <button id="theme-toggle" type="button"
+            class="fixed bottom-4 right-4 bg-gray-200 dark:bg-gray-700 p-2 rounded-md transition-colors duration-300 dark:text-white focus:outline-none z-[9000]">
+            Chuyển đổi giao diện
+        </button>
+
+        <h1 class="text-3xl font-bold text-center mb-6 dark:text-white">Tìm kiếm giá sản phẩm</h1>
+        <p class="text-center text-gray-600 dark:text-gray-400 mb-4 text-xl">
+            QUANHD | 
+            <a href="{{ url_for('api_docs') }}#api_docs" class="text-blue-500 hover:underline">
+                API Documentation
+            </a> | <a href="{{ url_for('api_docs') }}#web-component" class="text-blue-500 hover:underline">
+                Web Component </a>
+        </p>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+            <form id="search-form">
+                <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
+                    <div class="relative rounded-md shadow-sm mb-2 md:mb-0">
+                        <select
+                            class="appearance-none block w-full pl-3 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            id="star-filter">
+                            <option value="0">Tất cả đánh giá</option>
+                            <option value="500">5 sao</option>
+                            <option value="400">4 sao trở lên</option>
+                            <option value="300">3 sao trở lên</option>
+                            <option value="200">2 sao trở lên</option>
+                            <option value="100">1 sao trở lên</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                    <input type="text" id="product-name"
+                        class="flex-grow px-4 py-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2 md:mb-0"
+                        placeholder="Nhập tên sản phẩm cần tìm kiếm" required autocomplete="off">
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit" id="search-btn">
+                        Tìm kiếm
+                    </button>
+                </div>
+                <div id="suggestions" class="suggestions mt-2"></div>
+            </form>
+        </div>
+
+        <!-- lưu ý khi sử dụng công cụ -->
+        <div
+            class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mt-4 rounded-md mb-8" id="note">
+            <strong class="font-bold">Lưu ý:</strong> Công cụ này chỉ giúp bạn tìm kiếm giá sản phẩm từ các trang web
+            khác nhau và lấy ra sản phẩm rẻ nhất. Các sản phẩm được lấy từ các trang web khác nhau nên có thể không
+            chính xác 100%. Bạn nên kiểm tra kỹ trước khi mua hàng. <strong>Chúng tôi không chịu trách nhiệm về bất kỳ
+                vấn đề nào xảy ra khi bạn mua hàng.</strong>
+        </div>
+
+        <!-- hiển thị kết quả tìm kiếm -->
+        <div id="results">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+<script>
+    // Toggle dark mode
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    themeToggleBtn.addEventListener('click', () => {
+        const isDarkMode = htmlElement.classList.toggle('dark');
+        localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+    });
+
+    // Check localStorage for dark mode preference
+    const darkModePreference = localStorage.getItem('darkMode');
+    if (darkModePreference === 'enabled') {
+        htmlElement.classList.add('dark');
+    } else {
+        htmlElement.classList.remove('dark');
+    }
+</script>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+
+    <style>
+        /* Customize the scrollbar for code blocks */
+        pre::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        pre::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        pre::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        pre::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">API Documentation for QuanHD API</h1>
+
+        <a href="{{ url_for('index') }}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-6 inline-block">
+            Back to Home
+        </a>
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6 transition-transform duration-300 transform hover:scale-[1]"
+            id="web-component">
+            <h2 class="text-2xl font-semibold mb-4">Web Component</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <p class="font-medium mb-2"><span class="text-blue-500">Url:</span> <span
+                            class="font-normal">https://search.quanhd.net/static/modun.js</span></p>
+                    <p class="font-medium mb-2"><span class="text-yellow-500">Description:</span> <span
+                            class="font-normal">Nhúng web component tìm kiếm giá sản phẩm vào trang web của bạn</span>
+                    </p>
+                    <p class="font-medium mb-2"><span class="text-green-500">Lưu Ý:</span> <span class="font-normal">Các
+                            tính năng có thể bị hạn chế hoặc hoạt động không chính xác do hạn chế
+                            của Web Component trong việc truy cập dữ liệu từ trang web của bạn, vui lòng sử dụng API nếu
+                            cần</span></p>
+                    <p class="font-medium mb-2"><span class="text-blue-500">Demo:</span> <a
+                            href="{{ url_for('web_component_demo') }}"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4 inline-block">Xem
+                            Demo</a></p>
+
+                </div>
+                <div>
+                    <div
+                        class="bg-white dark:bg-white rounded-lg shadow-md p-6 mb-6 transition-transform duration-300 transform hover:scale-[1]">
+                        <product-search-app></product-search-app>
+                        <script src="/static/modun.js"></script>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Instructions:</h3>
+            <p class="mb-4 text-gray-600 dark:text-gray-400">Bạn cần thêm <code
+                    class="bg-gray-200 dark:bg-gray-700 p-1 rounded">script</code> sau vào trang web của bạn:</p>
+            <pre class="bg-gray-800 rounded-md p-4 overflow-x-auto"><code class="language-html">
+&lt;script src="https://search.quanhd.net/static/modun.js"&gt;&lt;/script&gt;
+</code></pre>
+            <p class="mb-4 text-gray-600 dark:text-gray-400">Sau đó, thêm thẻ <code
+                    class="bg-gray-200 dark:bg-gray-700 p-1 rounded">product-search-app</code> vào bất kỳ vị trí nào
+                trên trang web của bạn mà bạn muốn hiển thị thanh tìm kiếm giá sản phẩm:</p>
+            <pre class="bg-gray-800 rounded-md p-4 overflow-x-auto"><code class="language-html">
+&lt;product-search-app&gt;&lt;/product-search-app&gt;
+</code></pre>
+
+            <h3 class="text-lg font-semibold mb-2">Code Example:</h3>
+            <pre class="bg-gray-800 rounded-md p-4 overflow-x-auto"><code class="language-html">
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script src="https://search.quanhd.net/static/modun.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;product-search-app&gt;&lt;/product-search-app&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+        </div>
+        {% for endpoint in api_endpoints %}
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6 transition-transform duration-300 transform hover:scale-[1]"
+            id="api_docs">
+            <h2 class="text-2xl font-semibold mb-4">{{ endpoint.name }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <p class="font-medium mb-2"><span class="text-blue-500">Endpoint:</span> <span
+                            class="font-normal">{{ endpoint.endpoint }}</span></p>
+                    <p class="font-medium mb-2"><span class="text-green-500">Method:</span> <span
+                            class="font-normal">{{ endpoint.method }}</span></p>
+                    <p class="font-medium mb-2"><span class="text-yellow-500">Description:</span> <span
+                            class="font-normal">{{ endpoint.description }}</span></p>
+                </div>
+                <div>
+                    {% if endpoint.parameters %}
+                    <h3 class="text-lg font-semibold mb-2">Parameters:</h3>
+                    <ul class="list-disc list-inside">
+                        {% for param in endpoint.parameters %}
+                        <li><strong>{{ param.name }}</strong> (<span class="text-purple-500">{{ param.type }}</span>):
+                            {{ param.description }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+
+            <h3 class="text-lg font-semibold mb-2">cURL Example:</h3>
+            <pre
+                class="bg-gray-800 rounded-md p-4 overflow-x-auto"><code class="language-bash">{{ endpoint.curl_example }}</code></pre>
+
+            {% if endpoint.payload_example %}
+            <h3 class="text-lg font-semibold mt-4 mb-2">Payload Example:</h3>
+            <pre
+                class="bg-gray-800 rounded-md p-4 overflow-x-auto"><code class="language-json">{{ endpoint.payload_example }}</code></pre>
+            {% endif %}
+
+            <h3 class="text-lg font-semibold mt-4 mb-2">Response Example:</h3>
+            <pre
+                class="bg-gray-800 rounded-md p-4 overflow-x-auto"><code class="language-json">{{ endpoint.response_example }}</code></pre>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
