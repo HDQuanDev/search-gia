@@ -54,11 +54,15 @@
     ```bash
     pip install -r requirements.txt
     ```
-4. Chạy project:
+4. Chạy cài đặt Playwright lần đầu tiên cho Chrome:
+    ```bash
+    playwright install
+    ```
+5. Chạy project:
     ```bash
     python app.py
     ```
-5. Truy cập vào địa chỉ [http://localhost:5000/](http://localhost:5000/) để sử dụng.
+6. Truy cập vào địa chỉ [http://localhost:5000/](http://localhost:5000/) để sử dụng.
 
 # Liên Hệ
 
