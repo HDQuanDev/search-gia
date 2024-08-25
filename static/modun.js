@@ -172,10 +172,25 @@
             displayLoading(resultsDiv) {
                 resultsDiv.innerHTML = `
                     <div class="flex flex-col items-center justify-center mt-5 h-96">
-                        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div> 
-                        <p class="mt-3 text-gray-600 dark:text-gray-400">Xin vui lòng chờ, dữ liệu đang được tải...</p>
-                    </div>
+                <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div> 
+                <p class="mt-3 text-gray-600 dark:text-gray-400">Xin vui lòng chờ, dữ liệu đang được tải...</p>
+                <p class="mt-3 text-gray-600 dark:text-gray-400"><i class="fas fa-lightbulb text-yellow-500"></i> <span class="text red-500 dark:text-red-500">Lời Khuyên:</span> ${this.displayRandomTip()}</p>
+            </div>
                 `;
+            }
+
+            displayRandomTip() {
+                const tips = [
+                    'Để tìm kiếm chính xác hơn, hãy nhập tên sản phẩm cụ thể hơn.',
+                    'Hãy kiểm tra kỹ thông tin sản phẩm trước khi quyết định mua hàng.',
+                    'Dữ liệu có thể không chính xác do lỗi từ nguồn dữ liệu, bạn nên kiểm tra kỹ trước khi quyết định mua hàng.',
+                    'Các sản phẩm rẻ nhất có thể không phải là sản phẩm tốt nhất, hãy cân nhắc kỹ trước khi mua hàng.',
+                    'Nếu bạn gặp vấn đề khi sử dụng website, hãy liên hệ với chúng tôi để được hỗ trợ.',
+                    'Chúng tôi không chịu trách nhiệm về thông tin sản phẩm, bạn nên kiểm tra kỹ trước khi quyết định mua hàng.',
+                    'Các sản phẩm hiển thị sau khi tìm kiếm có thể không phù hợp với từ khóa tìm kiếm của bạn, hãy nhập từ khóa cụ thể hơn.',
+                ];
+                const randomTip = tips[Math.floor(Math.random() * tips.length)];
+                return randomTip;
             }
 
             displaySuggestions(suggestions, suggestionsDiv) {
@@ -300,7 +315,7 @@
 
             // Hàm để lấy 8 từ khóa thường tìm nhất
             getTopKeywords() {
-                if(this.SimpleMode) return;
+                if (this.SimpleMode) return;
                 fetch(`${this.apiUrl}/get_log?sort_by=search_count&order=desc&limit=${this.LogLimit}`)
                     .then(response => response.json())
                     .then(data => {

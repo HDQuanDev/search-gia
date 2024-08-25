@@ -358,4 +358,4 @@ def web_component_demo():
     return render_template('webcomponent.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)

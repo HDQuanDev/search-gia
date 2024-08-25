@@ -1,36 +1,36 @@
 {
   "tapo c200": {
-    "search_count": 7,
-    "total_results": 390,
+    "search_count": 9,
+    "total_results": 498,
     "cheapest_product": {
       "name": "Camera IP WiFi TP-Link Tapo C200 | 360°, 1080P 2MP",
       "price": 339000,
+      "source": "Tinhocngoisao.com",
       "img_url": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRvMb029hPjoXRkzV7NQInovQYcKwV2sYa5bebxxhKfPuZw7F1uDZbdA5dvnyimyudKM9TFLabazVcNIEZ8fOS3dmFIO4Fnz5G-P1y1vUkzMszFEbMSj0zhuw&usqp=CAE",
-      "product_link": "https://tinhocngoisao.com/products/camera-ip-wifi-tp-link-tapo-c200-360-1080p-2mp?srsltid=AfmBOorwEqQBz6V2IenzorOOHEHF4tZ_32dSPYG5vMiykELSGOdlhwZ8pq4",
-      "rating": "4,8",
-      "source": "Tinhocngoisao.com"
+      "product_link": "https://tinhocngoisao.com/products/camera-ip-wifi-tp-link-tapo-c200-360-1080p-2mp?srsltid=AfmBOooPxXhFM1Pjhd2QbNrxJHlnQtkIzhPWxoHmMX-0ZC7mv0E03TCUZbk",
+      "rating": "4,8"
     },
     "cheapest_price": 339000,
     "first_search": "2024-08-23 16:21:31",
-    "last_search": "2024-08-24 12:29:49",
+    "last_search": "2024-08-25 16:12:33",
     "variations": [
       "tapo c200"
     ]
   },
   "casio fx580": {
-    "search_count": 19,
-    "total_results": 531,
+    "search_count": 21,
+    "total_results": 619,
     "cheapest_product": {
-      "name": "Nắp ốp trang trí máy tính Casio fx 580VNX hình tự chọn -Nhận in theo yêu cầu các ...",
-      "price": 80000,
-      "img_url": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTug3Ubtgt55pbxkH8kH9bYRNq8NTWAB61N4fUskH4VYKOMxlHpzen9xTkAlEQ-iMCmzzdYROz6yrvwM75sy0ZrVwYq0YabWAm4iZNJJUJbRNY0x-akt6aS&usqp=CAE",
-      "product_link": "https://shopee.vn/product/182128903/25857927078?gads_t_sig=VTJGc2RHVmtYMTlxTFVSVVRrdENkUm9yWVZMbGw0Q214S0d1TzNEZmUwNjViQTR3MzRyVy9Bem1rZm84Nk1PVE5SYzBIUkt1OS94ZmZFK05QeTZzSGFRNWxJVXFsU3pHengzUm1PbSs3NHhSRzJHVVRGaWljWEl6TWJNODh3K2s",
-      "rating": "5,0",
-      "source": "Shopee"
+      "name": "NEW 100% Máy Tính FX-580 VNX (521 Phép Tính) - Hàng Nhập Thái - Chiến Binh Store",
+      "price": 363000,
+      "source": "Shopee",
+      "img_url": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRGXHNaQBmfSCPkK2B13n0BDTXhAXhF4VkKyzaLDSTMkghLZNgnbX_aVyNCBcwPEl5q7CQP2Ka4ET1CVcnbqhAiNEj1pnGMdj0r6jKtJWJfAi8KWashOA9n&usqp=CAE",
+      "product_link": "https://shopee.vn/product/90132540/22765533346?gads_t_sig=VTJGc2RHVmtYMTlxTFVSVVRrdENkUzJYdkg4SUFId3huV3BOemxRSlQvQ3NGUG5Ec1Rac2s2eWh6MWNTNEgvbmdad0c1akFyMVJESnl3Y0EwMkREN2ZFS0wvOTNyOHMwWXhsemtneHJyemlqbnlaU2VVb2l4M2tYSjRnZ0FkTHM",
+      "rating": "4,5"
     },
-    "cheapest_price": 80000,
+    "cheapest_price": 363000,
     "first_search": "2024-08-23 16:27:38",
-    "last_search": "2024-08-24 15:58:34",
+    "last_search": "2024-08-25 16:08:51",
     "variations": [
       "casio fx580"
     ]
