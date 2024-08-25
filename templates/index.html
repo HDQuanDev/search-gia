@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tìm kiếm giá sản phẩm</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind CSS config -->
     <script>
         tailwind.config = {
-            darkMode: 'class', // Kích hoạt chế độ dark mode bằng cách thêm class 'dark' vào phần tử HTML
+            darkMode: 'class', // Kích hoạt chế độ dark mode bằng class
             theme: {
                 extend: {
                     colors: {
@@ -20,10 +24,16 @@
         };
     </script>
 
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
+    <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Custom CSS -->
     <style>
         .suggestions span:hover {
             text-decoration: underline;
@@ -66,16 +76,16 @@
             class="fixed bottom-4 right-4 bg-gray-200 dark:bg-gray-700 p-2 rounded-md transition-colors duration-300 dark:text-white focus:outline-none z-[9000]">
             Chuyển đổi giao diện
         </button>
-
+        <!-- Header -->
         <h1 class="text-3xl font-bold text-center mb-6 dark:text-white">Tìm kiếm giá sản phẩm</h1>
         <p class="text-center text-gray-600 dark:text-gray-400 mb-4 text-xl">
-            QUANHD | 
+            QUANHD |
             <a href="{{ url_for('api_docs') }}#api_docs" class="text-blue-500 hover:underline">
                 API Documentation
             </a> | <a href="{{ url_for('api_docs') }}#web-component" class="text-blue-500 hover:underline">
                 Web Component </a>
         </p>
-
+        <!-- Form tìm kiếm -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
             <form id="search-form">
                 <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
@@ -108,13 +118,14 @@
                         Tìm kiếm
                     </button>
                 </div>
+
+                <!-- Gợi ý tìm kiếm -->
                 <div id="suggestions" class="suggestions mt-2"></div>
             </form>
         </div>
 
         <!-- lưu ý khi sử dụng công cụ -->
-        <div
-            class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mt-4 rounded-md mb-8" id="note">
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mt-4 rounded-md mb-8" id="note">
             <strong class="font-bold">Lưu ý:</strong> Công cụ này chỉ giúp bạn tìm kiếm giá sản phẩm từ các trang web
             khác nhau và lấy ra sản phẩm rẻ nhất. Các sản phẩm được lấy từ các trang web khác nhau nên có thể không
             chính xác 100%. Bạn nên kiểm tra kỹ trước khi mua hàng. <strong>Chúng tôi không chịu trách nhiệm về bất kỳ
@@ -123,30 +134,31 @@
 
         <!-- hiển thị kết quả tìm kiếm -->
         <div id="results">
-            <!-- Results will be displayed here -->
         </div>
     </div>
+
+    <!-- Script -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Chuyển đổi giao diện
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDarkMode = htmlElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+        });
+
+        // Kiểm tra chế độ giao diện đã lưu trong localStorage
+        const darkModePreference = localStorage.getItem('darkMode');
+        if (darkModePreference === 'enabled') {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+    </script>
 </body>
-<script>
-    // Toggle dark mode
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    const darkIcon = document.getElementById('theme-toggle-dark-icon');
-    const lightIcon = document.getElementById('theme-toggle-light-icon');
-
-    themeToggleBtn.addEventListener('click', () => {
-        const isDarkMode = htmlElement.classList.toggle('dark');
-        localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
-    });
-
-    // Check localStorage for dark mode preference
-    const darkModePreference = localStorage.getItem('darkMode');
-    if (darkModePreference === 'enabled') {
-        htmlElement.classList.add('dark');
-    } else {
-        htmlElement.classList.remove('dark');
-    }
-</script>
 
 </html>

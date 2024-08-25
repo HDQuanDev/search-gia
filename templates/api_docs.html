@@ -65,7 +65,7 @@
                 <div>
                     <div
                         class="bg-white dark:bg-white rounded-lg shadow-md p-6 mb-6 transition-transform duration-300 transform hover:scale-[1]">
-                        <product-search-app></product-search-app>
+                        <product-search-app simple-mode="true" log-limit="5"></product-search-app>
                         <script src="/static/modun.js"></script>
                     </div>
                 </div>
@@ -79,8 +79,23 @@
             <p class="mb-4 text-gray-600 dark:text-gray-400">Sau đó, thêm thẻ <code
                     class="bg-gray-200 dark:bg-gray-700 p-1 rounded">product-search-app</code> vào bất kỳ vị trí nào
                 trên trang web của bạn mà bạn muốn hiển thị thanh tìm kiếm giá sản phẩm:</p>
+            <ul class="list-disc list-inside mb-4">
+                <li class="mb-2">Hiện tại có 2 thuộc tính mà bạn có thể thêm vào thẻ <code
+                        class="bg-gray-200 dark:bg-gray-700 p-1 rounded">product-search-app</code>:</li>
+                <li><code class="bg-gray-200 dark:bg-gray-700 p-1 rounded">simple-mode</code> (mặc định là <code class="bg-gray-200 dark:bg-gray-700 p-1 rounded">false</code>):
+                    Nếu bạn muốn hiển thị thanh tìm kiếm giá sản phẩm ở chế độ đơn giản, hãy thêm thuộc tính này với giá
+                    trị là <code class="bg-gray-200 dark:bg-gray-700 p-1 rounded">true</code></li>
+                <li><code class="bg-gray-200 dark:bg-gray-700 p-1 rounded">log-limit</code> (mặc định là <code class="bg-gray-200 dark:bg-gray-700 p-1 rounded">12</code>): Số lượng kết quả từ khoá tìm kiếm phổ biến sẽ được hiển thị, nếu <code class="bg-gray-200 dark:bg-gray-700 p-1 rounded">simple-mode</code> là <code class="bg-gray-200 dark:bg-gray-700 p-1 rounded">true</code></li> thì thuộc tính này sẽ không có hiệu lực</li>
+            </ul>
             <pre class="bg-gray-800 rounded-md p-4 overflow-x-auto"><code class="language-html">
+&lt;!-- Hiển thị theo kiểu đơn giản --&gt;
+&lt;product-search-app simple-mode="true"&gt;&lt;/product-search-app&gt;
+
+&lt;!-- Hiển thị theo kiểu mặc định --&gt;
 &lt;product-search-app&gt;&lt;/product-search-app&gt;
+
+&lt;!-- Hiển thị theo kiểu mặc định với số lượng kết quả phổ biến là 5 --&gt;
+&lt;product-search-app log-limit="5"&gt;&lt;/product-search-app&gt;
 </code></pre>
 
             <h3 class="text-lg font-semibold mb-2">Code Example:</h3>

@@ -1,7 +1,7 @@
 {
   "tapo c200": {
-    "search_count": 6,
-    "total_results": 337,
+    "search_count": 7,
+    "total_results": 390,
     "cheapest_product": {
       "name": "Camera IP WiFi TP-Link Tapo C200 | 360°, 1080P 2MP",
       "price": 339000,
@@ -12,14 +12,14 @@
     },
     "cheapest_price": 339000,
     "first_search": "2024-08-23 16:21:31",
-    "last_search": "2024-08-23 19:15:58",
+    "last_search": "2024-08-24 12:29:49",
     "variations": [
       "tapo c200"
     ]
   },
   "casio fx580": {
-    "search_count": 18,
-    "total_results": 480,
+    "search_count": 19,
+    "total_results": 531,
     "cheapest_product": {
       "name": "Nắp ốp trang trí máy tính Casio fx 580VNX hình tự chọn -Nhận in theo yêu cầu các ...",
       "price": 80000,
@@ -30,7 +30,7 @@
     },
     "cheapest_price": 80000,
     "first_search": "2024-08-23 16:27:38",
-    "last_search": "2024-08-23 23:43:31",
+    "last_search": "2024-08-24 15:58:34",
     "variations": [
       "casio fx580"
     ]
@@ -160,6 +160,150 @@
     "last_search": "2024-08-23 23:28:58",
     "variations": [
       "abc"
+    ]
+  },
+  "samsung tab s9 fe": {
+    "search_count": 1,
+    "total_results": 52,
+    "cheapest_product": {
+      "name": "Samsung Galaxy Tab S7 FE (Wifi) Công Ty",
+      "price": 4890000,
+      "img_url": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQPgQED1J-k70nqVBZ9m25sqYZdjTTsUz55bMqpPjfZ6zxMvlfWbkPo-uPmG4d4r1KnYNEF2givwZ37OcqHISkB_nqvmVs56Rcm3S0LWU0OesSPEJ-5Xi7Kww&usqp=CAE",
+      "product_link": "https://www.viettablet.com/samsung-galaxy-tab-s7-fe-wifi?srsltid=AfmBOoopcJL362rPzPPv-wFmdJfzCGmeas_X_mmhAtUxuM9aITnX76WWOcw",
+      "rating": "4,7",
+      "source": "Viettablet"
+    },
+    "cheapest_price": 4890000,
+    "first_search": "2024-08-24 04:37:27",
+    "last_search": "2024-08-24 04:37:27",
+    "variations": [
+      "samsung tab s9 fe"
+    ]
+  },
+  "sony xperia 5": {
+    "search_count": 1,
+    "total_results": 21,
+    "cheapest_product": {
+      "name": "Điện thoại Sony Xperia 5 III (X5 Mark 3) màn OLED 120Hz - Snapdragon 888 ram 8G 128G",
+      "price": 4388000,
+      "img_url": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS_NykNUEQgEh9h686-ZQjXYbIJRH2l0NgRpxn71qYno7lJ3AvrqD_Zw30HKglUyPBqM5y2W_lPauZPEHSzBynhQvfvzrQonyP6TSLJFQieNN7KIUWzrYxq3Q&usqp=CAE",
+      "product_link": "https://shopee.vn/product/49282974/25619928701?gads_t_sig=VTJGc2RHVmtYMTlxTFVSVVRrdENkUzJYdkg4SUFId3huV3BOemxRSlQvQi9kN2tFUG44S2F1NnFiRWMvdCtUdkFQZGNJM0h3UVlZYmlrSEN3N3I0WVVKT3gyWWNpSHN1ZFQxNmxqNmw1dGNZVlV3YjVjYkJ6RFJsQi9JSlovL0k",
+      "rating": "4,8",
+      "source": "Shopee"
+    },
+    "cheapest_price": 4388000,
+    "first_search": "2024-08-24 04:50:25",
+    "last_search": "2024-08-24 04:50:25",
+    "variations": [
+      "sony xperia 5"
+    ]
+  },
+  "macbook pro m2": {
+    "search_count": 1,
+    "total_results": 52,
+    "cheapest_product": {
+      "name": "Macbook Air M2 8GB 256GB chính hãng T&T Center | Giá tốt",
+      "price": 19690000,
+      "img_url": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS0yC0cGxkmN9Jpg19He9E2dCZTjgu6NjluguKy2b-IZP3pS5gTri8ezwioo02eXnWqkUHcvIkDT44XsHpaNNwFccmDgP-p&usqp=CAE",
+      "product_link": "https://ttcenter.com.vn/macbook-air-m2-13inch-8gb-256gb?srsltid=AfmBOorFis-LEOB7NhNyt18epA2ak8sQ7IQ2zpm71PoTJ07i8XGPWrD_gfo",
+      "rating": "Chưa có đánh giá",
+      "source": "T&T Center"
+    },
+    "cheapest_price": 19690000,
+    "first_search": "2024-08-24 12:32:44",
+    "last_search": "2024-08-24 12:32:44",
+    "variations": [
+      "macbook pro m2"
+    ]
+  },
+  "pixel 8": {
+    "search_count": 1,
+    "total_results": 48,
+    "cheapest_product": {
+      "name": "Google Pixel 7 Lock",
+      "price": 5690000,
+      "img_url": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRbH095Spti5I0-kUhBuoWZONvMcB94nH6_xqwQqRLp5V12Hf7ZA3tbvUGt6Suw7MQIlFuu9hwOxMFHQwfekzWhk2lGGrt6ofzVessXYod8BrTQPJNzOIsF&usqp=CAE",
+      "product_link": "https://worldphone.vn/google-pixel-7-lock",
+      "rating": "Chưa có đánh giá",
+      "source": "worldphone.vn"
+    },
+    "cheapest_price": 5690000,
+    "first_search": "2024-08-24 21:05:31",
+    "last_search": "2024-08-24 21:05:31",
+    "variations": [
+      "Pixel 8"
+    ]
+  },
+  "absjdjannasd": {
+    "search_count": 1,
+    "total_results": 20,
+    "cheapest_product": {
+      "name": "Nước Hoa Issey Miyake Fusion D'Issey EDT",
+      "price": 2500000,
+      "img_url": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRQWpjJB0AkiJhHexZmqkKopqy8e0v_0IWH8KZMc7WY_l0yw835OS7y1iGL8NbyI8Qv7u-KKq4fEx18Hqzxvh7C4iV9Xb07f2-BN5b9zoC-p5cOL7po9uu1&usqp=CAE",
+      "product_link": "https://authentic-shoes.com/products/nuoc-hoa-issey-miyake-fusion-d-issey-edt?attribute_pa_kich-thuoc=lien-he-order",
+      "rating": "4,6",
+      "source": "Authentic Shoes Store"
+    },
+    "cheapest_price": 2500000,
+    "first_search": "2024-08-25 12:35:31",
+    "last_search": "2024-08-25 12:35:31",
+    "variations": [
+      "absjdjannasd"
+    ]
+  },
+  "absjdjannasd akdk makdgna": {
+    "search_count": 1,
+    "total_results": 28,
+    "cheapest_product": {
+      "name": "Xiaomi Redmi K70 5G Đen 16GB / 256GB",
+      "price": 8550000,
+      "img_url": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRq57SWZbGaqyZ7FmM2ukSZYS7LPSuEKwJIOKt93MIzo3CWYiMAA5GHKPutey-LkI-RKv9Pejhpy6uqscZ7TX5E-vyRqNzTB6O13cseGqES5buw4DZP0N-z&usqp=CAE",
+      "product_link": "https://dienthoaihay.vn/xiaomi/xiaomi-redmi-k70-5g-p716.html?mau=den&bonho=16gb-256gb&srsltid=AfmBOooF4VkoP-MDAq_d65Ew00JM7-P5paYPBA1W2zg4ITQaLzeItiq55eQ",
+      "rating": "Chưa có đánh giá",
+      "source": "Điện Thoại Hay"
+    },
+    "cheapest_price": 8550000,
+    "first_search": "2024-08-25 12:36:07",
+    "last_search": "2024-08-25 12:36:07",
+    "variations": [
+      "absjdjannasd ákdk mákdgna"
+    ]
+  },
+  "plqwo kaoowk laldmen": {
+    "search_count": 1,
+    "total_results": 28,
+    "cheapest_product": {
+      "name": "Nước Hoa Jean Paul Gaultier Le Beau Le Parfum EDP Intense Spray 125ml ...",
+      "price": 2550000,
+      "img_url": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTNaYojgRM_izbXBJnFIProaI7xpHrdwhZ_BZU4kF9kQg1OHkq6f8XqEuXm9-4hxo7Cg0go6J33iBz8KZhEgasR5u46mX7ujTzlpgQ5CB1wJJ1qXwMeRoAKCg&usqp=CAE",
+      "product_link": "https://minhshop.vn/san-pham/nuoc-hoa-jean-paul-gaultier-le-beau-le-parfum-edp-intense-spray-125ml-8435415062190/16858",
+      "rating": "4,8",
+      "source": "Minhshop.vn"
+    },
+    "cheapest_price": 2550000,
+    "first_search": "2024-08-25 12:36:45",
+    "last_search": "2024-08-25 12:36:45",
+    "variations": [
+      "plqwo kaoowk laldmen"
+    ]
+  },
+  "ax53u": {
+    "search_count": 1,
+    "total_results": 50,
+    "cheapest_product": {
+      "name": "ASUS RT-AC53 Chuẩn AC750, 2 băng tần, cổng Gigabit",
+      "price": 950000,
+      "img_url": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTzEFlEmbALgfHGLQUQUKUttnsFdYiGOMNZGUJRTlEikx2Y40VEH2LZ5NHyHXhV3_De6uEy3rQiA4mIBgNjGrT2KDvynGeFbi2QvUFYKwE2ebgDTL02hpOy2A&usqp=CAE",
+      "product_link": "https://thanhnhancomputer.vn/san-pham/asus-rt-ac53-chuan-ac750-2-bang-tan-cong-gigabit-627",
+      "rating": "Chưa có đánh giá",
+      "source": "Thành Nhân Computer - 992 Âu Cơ"
+    },
+    "cheapest_price": 950000,
+    "first_search": "2024-08-25 15:33:30",
+    "last_search": "2024-08-25 15:33:30",
+    "variations": [
+      "ax53u"
     ]
   }
 }

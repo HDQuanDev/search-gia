@@ -3,6 +3,8 @@
             constructor() {
                 super();
                 this.apiUrl = 'https://search.quanhd.net';
+                this.LogLimit = this.getAttribute('log-limit') || 12;
+                this.SimpleMode = this.getAttribute('simple-mode') || false;
                 this.attachShadow({
                     mode: 'open'
                 });
@@ -18,7 +20,41 @@
                 this.shadowRoot.appendChild(styleSheet);
 
                 // Add your component's HTML
-                this.shadowRoot.innerHTML += `
+                if (this.SimpleMode) {
+                    this.shadowRoot.innerHTML += `
+            <div class="container mx-auto px-4 py-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
+                    <form id="search-form">
+                        <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
+                            <div class="relative rounded-md shadow-sm mb-2 md:mb-0">
+                                <select class="appearance-none block w-full pl-3 pr-10 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-gray-200" id="star-filter">
+                                    <option value="0">Tất cả đánh giá</option>
+                                    <option value="500">5 sao</option>
+                                    <option value="400">4 sao trở lên</option>
+                                    <option value="300">3 sao trở lên</option>
+                                    <option value="200">2 sao trở lên</option>
+                                    <option value="100">1 sao trở lên</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <input type="text" id="product-name" class="flex-grow px-4 py-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200
+                            focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2 md:mb-0" placeholder="Nhập tên sản phẩm cần tìm kiếm" required autocomplete="off">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" id="search-btn">
+                                Tìm kiếm
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 text-center">Powered by <a href="https://www.facebook.com/quancp72h" class="text-blue-500 hover:underline" target="_blank">QuanHD</a></p>
+                </div>
+                <div id="results"></div>
+            </div>
+        `;
+                } else {
+                    this.shadowRoot.innerHTML += `
             <div class="container mx-auto px-4 py-8">
                 <h1 class="text-3xl font-bold text-center text-gray-900">Plugin tìm kiếm giá sản phẩm</h1>
                 <p class="text-center text-gray-600 dark:text-gray-400 mb-4 text-xl">
@@ -60,6 +96,7 @@
                 <div id="results"></div>
             </div>
         `;
+                }
 
                 // Initialize event listeners and other setup
                 this.initEventListeners();
@@ -72,32 +109,33 @@
                 const resultsDiv = this.shadowRoot.getElementById('results');
                 let debounceTimer;
 
-                productNameInput.addEventListener('input', () => {
-                    clearTimeout(debounceTimer);
-                    debounceTimer = setTimeout(() => {
-                        const term = productNameInput.value;
-                        if (term.length >= 2) {
-                            fetch(`${this.apiUrl}/suggest?term=${encodeURIComponent(term)}`)
-                                .then((response) => response.json())
-                                .then((data) => {
-                                    this.displaySuggestions(data, suggestionsDiv);
-                                });
-                        } else {
+                if (this.SimpleMode === 'false') {
+                    productNameInput.addEventListener('input', () => {
+                        clearTimeout(debounceTimer);
+                        debounceTimer = setTimeout(() => {
+                            const term = productNameInput.value;
+                            if (term.length >= 2) {
+                                fetch(`${this.apiUrl}/suggest?term=${encodeURIComponent(term)}`)
+                                    .then((response) => response.json())
+                                    .then((data) => {
+                                        this.displaySuggestions(data, suggestionsDiv);
+                                    });
+                            } else {
+                                suggestionsDiv.innerHTML = '';
+                            }
+                        }, 300);
+                    });
+
+                    document.addEventListener('click', (event) => {
+                        if (!suggestionsDiv.contains(event.target) && event.target !== productNameInput) {
                             suggestionsDiv.innerHTML = '';
                         }
-                    }, 300);
-                });
+                    });
 
-                document.addEventListener('click', (event) => {
-                    if (!suggestionsDiv.contains(event.target) && event.target !== productNameInput) {
-                        suggestionsDiv.innerHTML = '';
-                    }
-                });
-
-                suggestionsDiv.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                });
-
+                    suggestionsDiv.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                    });
+                }
                 searchForm.addEventListener('submit', (e) => {
                     e.preventDefault();
                     const productName = productNameInput.value;
@@ -260,10 +298,10 @@
                 }
             }
 
-
             // Hàm để lấy 8 từ khóa thường tìm nhất
             getTopKeywords() {
-                fetch(`${this.apiUrl}/get_log?sort_by=search_count&order=desc&limit=12`)
+                if(this.SimpleMode) return;
+                fetch(`${this.apiUrl}/get_log?sort_by=search_count&order=desc&limit=${this.LogLimit}`)
                     .then(response => response.json())
                     .then(data => {
                         this.displayTopKeywords(data, this.shadowRoot.getElementById('search-form'));

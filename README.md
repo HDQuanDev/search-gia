@@ -32,7 +32,11 @@
 
 - Phân tích để lấy các sản phẩm giá rẻ nhất theo từ khóa tìm kiếm.
 
+- Lọc và đánh giá sản phẩm để tìm ra sản phẩm phù hợp nhất.
+
 - Tạo API để trả về dữ liệu đã phân tích.
+
+- Tạo Web Component để nhúng vào các trang web khác.
 
 - Tạo giao diện web để hiển thị dữ liệu đã phân tích.
 
@@ -42,15 +46,19 @@
     ```bash
     git clone https://github.com/HDQuanDev/search-gia.git
     ```
-2. Cài đặt các thư viện cần thiết:
+2. Di chuyển vào thư mục project:
+    ```bash
+    cd search-gia
+    ```
+3. Cài đặt các thư viện cần thiết:
     ```bash
     pip install -r requirements.txt
     ```
-3. Chạy project:
+4. Chạy project:
     ```bash
     python app.py
     ```
-4. Truy cập vào địa chỉ [http://localhost:5000/](http://localhost:5000/) để sử dụng.
+5. Truy cập vào địa chỉ [http://localhost:5000/](http://localhost:5000/) để sử dụng.
 
 # Liên Hệ
 

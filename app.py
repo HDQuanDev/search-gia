@@ -12,117 +12,132 @@ from product_filter import (
 )
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)
 
 def normalize_keyword(keyword):
-    # Chuyển về chữ thường và loại bỏ dấu
+    """
+    Chuẩn hóa từ khóa bằng cách:
+    - Chuyển về chữ thường
+    - Loại bỏ dấu
+    - Loại bỏ ký tự đặc biệt
+    - Loại bỏ khoảng trắng thừa
+
+    :param keyword: Từ khóa cần chuẩn hóa
+    :return: Từ khóa đã được chuẩn hóa
+    """
     normalized = unidecode(keyword.lower())
-    # Loại bỏ các ký tự không phải chữ cái hoặc số, thay thế bằng một khoảng trắng
     normalized = re.sub(r'[^a-z0-9]+', ' ', normalized)
-    # Loại bỏ khoảng trắng thừa ở đầu và cuối, và giữa các từ
     normalized = ' '.join(normalized.split())
     return normalized
 
 def log_search_info(keyword, result_count, cheapest_product):
+    """
+    Ghi thông tin tìm kiếm vào file search_log.json, bao gồm:
+    - Từ khóa
+    - Số lượng kết quả
+    - Sản phẩm rẻ nhất
+    - Thời gian tìm kiếm
+
+    :param keyword: Từ khóa tìm kiếm
+    :param result_count: Số lượng kết quả tìm kiếm
+    :param cheapest_product: Thông tin sản phẩm rẻ nhất
+    """
     log_file = "search_log.json"
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
-    # Chuẩn hóa từ khóa
     normalized_keyword = normalize_keyword(keyword)
-    
+
     try:
         with open(log_file, "r", encoding="utf-8") as file:
             log_data = json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
         log_data = {}
-    
+
     if normalized_keyword in log_data:
+        # Cập nhật thông tin nếu từ khóa đã tồn tại
         log_data[normalized_keyword]["search_count"] += 1
         log_data[normalized_keyword]["total_results"] += result_count
         log_data[normalized_keyword]["last_search"] = timestamp
-        if cheapest_product and (log_data[normalized_keyword]["cheapest_price"] is None or 
-                                 cheapest_product["price"] < log_data[normalized_keyword]["cheapest_price"]):
-            log_data[normalized_keyword]["cheapest_product"] = {
-                "name": cheapest_product["name"],
-                "price": cheapest_product["price"],
-                "img_url": cheapest_product["img_url"],
-                "product_link": cheapest_product["product_link"],
-                "rating": cheapest_product["rating"],
-                "source": cheapest_product["source"]
-            }
-            log_data[normalized_keyword]["cheapest_price"] = cheapest_product["price"]
+
+        # Cập nhật sản phẩm rẻ nhất nếu giá rẻ hơn
+        log_data[normalized_keyword]["cheapest_product"] = cheapest_product
+        log_data[normalized_keyword]["cheapest_price"] = cheapest_product["price"]
+
+        # Thêm biến thể từ khóa nếu chưa tồn tại
         if keyword not in log_data[normalized_keyword]["variations"]:
             log_data[normalized_keyword]["variations"].append(keyword)
     else:
+        # Tạo mới thông tin nếu từ khóa chưa tồn tại
         log_data[normalized_keyword] = {
             "search_count": 1,
             "total_results": result_count,
-            "cheapest_product": {
-                "name": cheapest_product["name"],
-                "price": cheapest_product["price"],
-                "img_url": cheapest_product["img_url"],
-                "product_link": cheapest_product["product_link"],
-                "rating": cheapest_product["rating"],
-                "source": cheapest_product["source"]
-            } if cheapest_product else None,
+            "cheapest_product": cheapest_product,
             "cheapest_price": cheapest_product["price"] if cheapest_product else None,
             "first_search": timestamp,
             "last_search": timestamp,
             "variations": [keyword]
         }
-    
+
     with open(log_file, "w", encoding="utf-8") as file:
         json.dump(log_data, file, ensure_ascii=False, indent=2)
-        
+
 def read_log_data():
+    """
+    Đọc dữ liệu từ file search_log.json.
+
+    :return: Dữ liệu từ file log, hoặc một dict rỗng nếu file không tồn tại hoặc lỗi đọc file.
+    """
     log_file = "search_log.json"
     try:
         with open(log_file, "r", encoding="utf-8") as file:
             return json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
         return {}
-    
+
 @app.route('/')
 def index():
+    """
+    Hiển thị trang chủ.
+
+    :return: Template index.html
+    """
     return render_template('index.html')
 
 @app.route('/search', methods=['POST'])
 def search():
-    product_name = request.form.get('product_name') # Lấy tên sản phẩm từ form
-    star_filter = request.form.get('star_filter', 0) # Lấy giá trị của star_filter từ form, mặc định là 0 nếu không có
+    """
+    API tìm kiếm sản phẩm.
+
+    :return: Kết quả tìm kiếm dưới dạng JSON.
+    """
+    product_name = request.form.get('product_name')
+    star_filter = request.form.get('star_filter', 0)
 
     if not product_name:
-        return jsonify({
-            'message': 'Vui lòng nhập tên sản phẩm cần tìm.'
-        })
+        return jsonify({'message': 'Vui lòng nhập tên sản phẩm cần tìm.'})
 
-    # Không cần kiểm tra star_filter nữa vì đã có giá trị mặc định
-    # Chuyển đổi star_filter sang số nguyên
     try:
         min_rating = int(star_filter)
     except ValueError:
-        min_rating = 0  # Nếu không thể chuyển đổi, gán giá trị mặc định là 0
+        min_rating = 0
 
     html_content = search_product(product_name, min_rating)
     products = parse_product_info(html_content, product_name)
+
     if not products:
-        log_search_info(product_name, 0, None)
-        return jsonify({
-            'message': 'Không tìm thấy sản phẩm nào phù hợp.'
-        })
-    
+        return jsonify({'message': 'Không tìm thấy sản phẩm nào phù hợp.'})
+
     popular_products = filter_by_popular_sources(products)
     products_to_use = popular_products if popular_products else products
-    
+
     cheapest_products = filter_cheapest_by_source(products_to_use)
     cheapest_products.sort(key=lambda x: x['price'])
     cheapest_overall = min(cheapest_products, key=lambda x: x['price']) if cheapest_products else None
-    
+
     mean_price, stdev_price = calculate_price_stats(products_to_use)
-    
-    # Log thông tin tìm kiếm với từ khóa gốc
+
+    # **Update cheapest product after each search:**
     log_search_info(product_name, len(products), cheapest_overall)
-    
+
     return jsonify({
         'cheapest_products': cheapest_products,
         'cheapest_overall': cheapest_overall,
@@ -131,26 +146,41 @@ def search():
         'mean_price': mean_price,
         'stdev_price': stdev_price
     })
-    
+
 @app.route('/suggest')
 def suggest():
+    """
+    API gợi ý từ khóa tìm kiếm.
+
+    :return: Danh sách gợi ý từ Google dưới dạng JSON.
+    """
     term = request.args.get('term', '')
     suggestions = get_google_suggestions(term)
     return jsonify(suggestions)
 
 def get_google_suggestions(query):
+    """
+    Lấy gợi ý từ khóa tìm kiếm từ Google Suggest API.
+
+    :param query: Từ khóa tìm kiếm
+    :return: Danh sách gợi ý từ Google
+    """
     url = f"http://suggestqueries.google.com/complete/search?client=firefox&q={query}"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
-        # Google trả về một mảng, trong đó phần tử thứ hai chứa các gợi ý
         return data[1]
     return []
 
 @app.route('/get_log', methods=['GET'])
 def get_log():
+    """
+    API lấy dữ liệu log tìm kiếm.
+
+    :return: Dữ liệu log tìm kiếm dưới dạng JSON.
+    """
     log_data = read_log_data()
-    
+
     keyword = request.args.get('keyword')
     sort_by = request.args.get('sort_by', 'search_count')
     order = request.args.get('order', 'desc')
@@ -175,6 +205,11 @@ def get_log():
 
 @app.route('/api-docs')
 def api_docs():
+    """
+    Hiển thị trang tài liệu API.
+
+    :return: Template api_docs.html
+    """
     api_endpoints = [
         {
             'name': 'Search API',
@@ -315,7 +350,12 @@ curl -X POST https://search.quanhd.net/search \\
 
 @app.route('/web_component_demo')
 def web_component_demo():
+    """
+    Hiển thị trang demo web component.
+
+    :return: Template webcomponent.html
+    """
     return render_template('webcomponent.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)

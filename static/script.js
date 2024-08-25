@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let debounceTimer;
 
-    var urlAPI = 'https://search.quanhd.net';
+    // Url API
+    //var urlAPI = 'https://search.quanhd.net';
+    var urlAPI = 'http://localhost:5000';
 
     // Hàm hiển thị các sản phẩm rẻ nhất mặc định
     function displayDefaultProducts(products) {
@@ -25,8 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         products.forEach((product) => {
             const productCard = `
-
-
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1">
                     <img src="${product.cheapest_product.img_url}" alt="${product.cheapest_product.name}" class="w-full h-48 object-cover transition-transform duration-300 transform hover:scale-110">
                     <div class="p-4 flex-grow">
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resultsDiv.appendChild(defaultProductsDiv);
     }
 
-    // Hàm để lấy 8 từ khóa thường tìm nhất
+    // Hàm để lấy từ khóa thường tìm nhất
     function getTopKeywords() {
         fetch(`${urlAPI}/get_log?sort_by=search_count&order=desc&limit=12`)
             .then(response => response.json())
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error:', error));
     }
 
-    // Hàm hiển thị 8 từ khóa thường tìm nhất
+    // Hàm hiển thị từ khóa thường tìm nhất
     function displayTopKeywords(keywords) {
         const topKeywordsDiv = document.createElement('div');
         topKeywordsDiv.className = 'top-keywords mt-3 flex flex-wrap';
@@ -128,9 +128,10 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     `;
 
-
+        // Thêm popup vào trang web
         document.body.appendChild(popupDiv);
 
+        // Thêm sự kiện click cho nút "Tìm kiếm lại"
         document.getElementById('search-again').addEventListener('click', () => {
             productNameInput.value = keyword.keyword;
             popupDiv.remove();
@@ -144,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Sự kiện khi người dùng nhập vào ô tìm kiếm
     productNameInput.addEventListener('input', function () {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
@@ -160,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 300);
     });
 
+    // Hàm hiển thị gợi ý tìm kiếm
     function displaySuggestions(suggestions) {
         suggestionsDiv.innerHTML = '';
         if (suggestions.length === 0) return;
@@ -200,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             suggestionItem.addEventListener('click', function () {
                 productNameInput.value = suggestion;
-                suggestionsDiv.innerHTML = ''; // Clear suggestions
+                suggestionsDiv.innerHTML = ''; // Dọn dẹp gợi ý khi chọn
             });
 
             suggestionList.appendChild(suggestionItem);
@@ -211,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('click', function (event) {
         if (!suggestionsDiv.contains(event.target) && event.target !== productNameInput) {
-            suggestionsDiv.innerHTML = ''; // Clear suggestions directly
+            suggestionsDiv.innerHTML = ''; // Dọn dẹp gợi ý khi click ra ngoài
         }
     });
 
@@ -225,17 +228,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const starfield = document.getElementById('star-filter').value;
         document.getElementById('search-btn').disabled = true;
         document.getElementById('search-btn').innerHTML = 'Đang tìm kiếm...';
-        //remove div id note
+
+        //xoá div id note
         const note = document.getElementById('note');
         if (note) {
             note.remove();
         }
-        //remove div id default-products
+
+        //xoá div id default-products
         const defaultProducts = document.getElementById('default-products');
         if (defaultProducts) {
             defaultProducts.remove();
         }
+
+        //hiển thị loading
         displayLoading();
+
+        // Gửi request đến API để tìm kiếm
         fetch(`${urlAPI}/search`, {
                 method: 'POST',
                 headers: {
@@ -256,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error:', error));
     });
 
+    // Hàm hiển thị loading
     function displayLoading() {
         resultsDiv.innerHTML = `
             <div class="flex flex-col items-center justify-center mt-5 h-96">
@@ -265,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     }
 
-
+    // Hàm hiển thị kết quả tìm kiếm
     function displayResults(data) {
         const resultsDiv = document.getElementById("results");
         resultsDiv.innerHTML = "";
@@ -360,6 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resultsDiv.appendChild(cheapestProductsDiv);
     }
 
+    // Hàm tạo card sản phẩm
     function createProductCard(product, isOverall = false, isCompact = false) {
         if (isOverall) {
             return `
