@@ -1,3 +1,13 @@
+"""
+- Project: Search Giá
+- File: product_filter.py
+- Author: Hứa Đức Quân (https://www.facebook.com/quancp72h)
+- Website: https://search.quanhd.net
+- Created: 2024-08-27
+- Last Modified: 2024-08-27
+** Xin vui lòng giữ lại thông tin này khi sử dụng code / Please keep this information when using the code **
+"""
+
 from playwright.sync_api import sync_playwright
 from urllib.parse import unquote, urlparse, parse_qs
 from bs4 import BeautifulSoup

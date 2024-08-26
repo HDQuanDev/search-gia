@@ -1,3 +1,13 @@
+
+// - Project: Search Giá
+// - File: satic/script.js
+// - Author: Hứa Đức Quân (https://www.facebook.com/quancp72h)
+// - Website: https://search.quanhd.net
+// - Created: 2024-08-27
+// - Last Modified: 2024-08-27
+// ** Xin vui lòng giữ lại thông tin này khi sử dụng code / Please keep this information when using the code **
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const productNameInput = document.getElementById('product-name');
     const suggestionsDiv = document.getElementById('suggestions');
